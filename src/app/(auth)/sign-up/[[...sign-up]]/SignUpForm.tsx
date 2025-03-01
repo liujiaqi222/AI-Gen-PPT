@@ -9,7 +9,7 @@ const SignUpForm = () => {
   const [state, formAction] = useActionState(signUp, null);
   return (
     <form action={formAction}>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 w-64">
         {state?.message && <p className="text-sm text-red-500">{state.message}</p>}
         <div>
           <Label htmlFor="name">Name</Label>

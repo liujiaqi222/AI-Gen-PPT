@@ -10,18 +10,22 @@ import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
+import { SessionData } from './type';
 
 @Injectable()
 export class AuthService {
-  async validateLocalUser(email: string, password: string) {
+  async validateLocalUser(
+    email: string,
+    password: string,
+  ): Promise<SessionData> {
     const user = await this.usersService.findByEmail(email);
     if (!user) throw new UnauthorizedException('User not found!');
     const isPasswordMatched = await verify(user.password, password);
     if (!isPasswordMatched)
       throw new UnauthorizedException('Invalid Credentials');
     return {
-      id: user.id,
       name: user.name,
+      email: user.email,
     };
   }
   @InjectRepository(User)

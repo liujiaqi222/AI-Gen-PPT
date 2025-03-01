@@ -14,9 +14,9 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     const { password, ...user } = createUserDto;
 
+    // argon2 这个库会先生成salt再hash  https://github.com/ranisalt/node-argon2/wiki/Options#salt
     const hashedPassword = await hash(password);
     // 创建用户实体
-
     const newUser = this.usersRepository.create({
       password: hashedPassword,
       ...user,
