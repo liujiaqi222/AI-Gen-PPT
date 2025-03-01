@@ -1,6 +1,6 @@
-import { get,  } from '../lib/api'
+import { serverGet } from "../lib/server-api";
 
-export const getAllProjects = (options?: { headers?: HeadersInit }) => {
-  return get("/projects", options);
+export const getAllProjects = () => {
+  return serverGet("/projects");
 };
 

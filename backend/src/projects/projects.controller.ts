@@ -6,7 +6,6 @@ import { SessionAuthGuard } from 'src/auth/guards/session-auth.guard';
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
- 
   @UseGuards(SessionAuthGuard)
   @Get()
   findAll() {
