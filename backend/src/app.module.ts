@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { ProjectsModule } from './projects/projects.module';
 import { AuthModule } from './auth/auth.module';
 import dataSource from './db/data-source'; // 导入独立配置文件
+import { RedisModule } from './db/redis.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import dataSource from './db/data-source'; // 导入独立配置文件
     UsersModule,
     ProjectsModule,
     AuthModule,
+    RedisModule
   ],
   controllers: [AppController],
   providers: [AppService],

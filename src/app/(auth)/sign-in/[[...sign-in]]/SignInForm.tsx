@@ -1,5 +1,5 @@
 "use client";
-import { signIn } from "@/actions/auth";
+import { signIn } from "@/api/auth";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import SubmitButton from "@/components/ui/SubmitButton";

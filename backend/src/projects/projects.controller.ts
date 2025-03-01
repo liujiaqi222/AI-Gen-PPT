@@ -1,11 +1,13 @@
-import { Controller, Get,  Param, Delete } from '@nestjs/common';
+import { Controller, Get,  Param, Delete, UseGuards } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
+import { SessionAuthGuard } from 'src/auth/guards/session-auth.guard';
 
 @Controller('projects')
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
  
+  @UseGuards(SessionAuthGuard)
   @Get()
   findAll() {
     return this.projectsService.findAll();

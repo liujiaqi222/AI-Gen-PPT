@@ -24,7 +24,7 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-  console.log(fs.readFileSync)
+  console.log(fs.readFileSync);
   await app.register(secureSession, {
     key: fs.readFileSync(path.join(__dirname, '..', 'secret-key')),
     cookieName: 'session',
@@ -35,6 +35,7 @@ async function bootstrap() {
       secure: process.env.NODE_ENV === 'production',
     },
   });
+  app.enableCors({origin:'http://localhost:3000',credentials:true});
 
   await app.listen(port);
 }

@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ProjectsService {
- 
+  
   findAll() {
-    return `This action returns all projects`;
+    return { data: '`This action returns all projects`' };
   }
 
   findOne(id: number) {
