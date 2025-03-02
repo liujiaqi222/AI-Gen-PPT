@@ -6,15 +6,13 @@ import {
   Request,
   Inject,
 } from '@nestjs/common';
-import { FastifyRequest } from 'fastify';
-import { Session } from '@fastify/secure-session';
 import * as crypto from 'node:crypto';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { SESSION_CONSTANTS } from '../constants/session.constants';
 import { LocalAuthGuard } from './guards/local-auth/local-auth.guard';
 import { RedisClient } from '../db/redis.provider';
-import { SessionData } from './type';
+import { AuthRequest,  } from './type';
 
 @Controller('auth')
 export class AuthController {
@@ -30,12 +28,8 @@ export class AuthController {
   @Post('sign-in')
   async login(
     @Request()
-    req: FastifyRequest & {
-      user: SessionData; // 返回值见 this.authService.validateLocalUser(email,password)
-      session: Session<SessionData<{sessionId:string}>>;
-    },
+    req: AuthRequest,
   ) {
-    console.log(req);
     const sessionId = crypto.randomUUID();
     req.session.set('email', req.user.email);
     req.session.set('name', req.user.name);
@@ -52,16 +46,14 @@ export class AuthController {
     );
     return {
       message: 'Login successful',
-      data: { sessionId, email: req.user.email },
+      data: {  email: req.user.email,name:req.user.name },
     };
   }
 
   @Post('sign-out')
   async signOut(
     @Request()
-    req: FastifyRequest & {
-      session: Session<SessionData<{sessionId:string}>>;
-    },
+    req: AuthRequest,
   ) {
     const sessionId = req.session.get('sessionId') as string | undefined;
     if (sessionId) {

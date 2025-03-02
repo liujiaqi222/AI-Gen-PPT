@@ -41,7 +41,7 @@ export class Project {
   @ManyToOne(() => User, (user) => user.ownedProjects)
   @JoinColumn({
     name: 'userId',
-    referencedColumnName: 'id',
+    referencedColumnName: 'email',
     foreignKeyConstraintName: 'FK_PROJECT_USER',
   })
   owner: User; //  CONSTRAINT fk_project_user FOREIGN KEY (userId) REFERENCES user(id)

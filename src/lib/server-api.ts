@@ -6,9 +6,9 @@ import { get as clientGet, post as clientPost } from "./api";
  * for authenticated requests in server components.
  */
 
-export const serverGet = async (endpoint: string, options?: Parameters<typeof clientGet>[1]) => {
+export const serverGet = async <T>(endpoint: string, options?: Parameters<typeof clientGet>[1]) => {
   const cookieStore = await cookies();
-  return clientGet(endpoint, {
+  return clientGet<T>(endpoint, {
     ...options,
     headers: {
       ...options?.headers,
@@ -17,13 +17,13 @@ export const serverGet = async (endpoint: string, options?: Parameters<typeof cl
   });
 };
 
-export const serverPost = async (
+export const serverPost = async <T>(
   endpoint: string,
   body: Parameters<typeof clientPost>[1],
   options?: Parameters<typeof clientPost>[2]
 ) => {
   const cookieStore = cookies();
-  return clientPost(endpoint, body, {
+  return clientPost<T>(endpoint, body, {
     ...options,
     headers: {
       ...options?.headers,

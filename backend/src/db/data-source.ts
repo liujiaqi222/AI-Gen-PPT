@@ -11,6 +11,6 @@ export default new DataSource({
   password: '', 
   database: 'nest_ai_ppt',
   entities: [User, Project],
-  synchronize: true, // 必须关闭
+  synchronize: true,
   logging: true, // 开启日志
 });
